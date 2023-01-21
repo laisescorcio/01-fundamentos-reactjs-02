@@ -1,8 +1,8 @@
 // JSX = JS + XML
 import { useState } from 'react'
-import { Post } from './Post'
 import { Header } from './components/Header'
 import { Sidebar } from './components/Sidebar'
+import { Post } from './components/Post'
 
 import './global.css';
 
