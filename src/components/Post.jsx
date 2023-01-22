@@ -1,13 +1,15 @@
 import styles from './Post.module.css'
 
+import { Comment } from './Comment'
+import { Avatar } from './Avatar'
+
 export function Post(props) {
     return (
         <article className={styles.post}>
             <header>
                 <div className={styles.author}>
-                    <img 
-                        className={styles.avatar} 
-                        src="https://avatars.githubusercontent.com/u/61030205?v=4" 
+                    <Avatar 
+                        src="https://images.unsplash.com/photo-1597223557154-721c1cecc4b0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80" 
                     />
                     <div className={styles.authorInfo}>
                         <strong>Laís Escorcio</strong>
@@ -41,9 +43,17 @@ export function Post(props) {
                     placeholder="Deixe um comentário"
                 />
 
-                <button type="submit">Publicar</button>
+                <footer>
+                    <button type="submit">Publicar</button>
+                </footer>
 
             </form>
+
+            <div className={styles.commentList}>
+                <Comment />
+                <Comment />
+                <Comment />
+            </div>
         </article>
     )
 }
