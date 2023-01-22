@@ -1,23 +1,42 @@
-import styles from './Post.module.css'
-
+import { format, formatDistanceToNow } from 'date-fns' // Biblioteca para formatar Data e Hora
+import ptBR from 'date-fns/locale/pt-BR' // para formatar Data e Hora
 import { Comment } from './Comment'
 import { Avatar } from './Avatar'
 
-export function Post(props) {
+import styles from './Post.module.css'
+export function Post({ author, publishedAt }) {
+
+// DATA E HORA
+    // formatar data em extenso, exemplo: 20 de janeiro às 20:00h
+    const publishedDateFormatted = format(publishedAt, "d 'de' LLLL 'às' HH'h'mm", {
+        locale: ptBR
+    })
+
+    // compara a data de publicação com a data atual e adiciona o sufix 'há', exemplo: há 8 dias
+    const publishedDateRelativeToNow = formatDistanceToNow(publishedAt, {
+        locale: ptBR,
+        addSuffix: true
+    })
+// DATA E HORA
+
+
+
     return (
         <article className={styles.post}>
             <header>
                 <div className={styles.author}>
                     <Avatar 
-                        src="https://images.unsplash.com/photo-1597223557154-721c1cecc4b0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80" 
+                        src={author.avatarUrl} 
                     />
                     <div className={styles.authorInfo}>
-                        <strong>Laís Escorcio</strong>
-                        <span>Tech Lead</span>
+                        <strong>{author.name}</strong>
+                        <span>{author.role}</span>
                     </div>
                 </div>
 
-                <time dateTime="2023-05-11 08:13:20">Publicado há 1h</time>
+                <time title={publishedDateFormatted} dateTime={publishedAt.toISOString()}>
+                    { publishedDateRelativeToNow }
+                </time>
             </header>
 
             <div className={styles.content}>
