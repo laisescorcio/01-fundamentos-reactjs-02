@@ -32,6 +32,7 @@ export function Post({ author, publishedAt, content }) {
     }
 
     function handleNewCommentChange() {
+        event.target.setCustomValidity(''); // necessário setar para retirar o erro de validação
         setNewCommentText(event.target.value);
     }
 
@@ -47,8 +48,10 @@ export function Post({ author, publishedAt, content }) {
     }
 
     function handleNewCommentInvalid() {
-        
+        event.target.setCustomValidity('Este campo é obrigatório!') // necessário setar para retornar erro de validação
     }
+
+    const isNewCommentEmpty = newCommentText.length === 0 // quando não há conteúdo de comentário o botão fica desabilitado
 
     return (
         <article className={styles.post}>
@@ -96,7 +99,7 @@ export function Post({ author, publishedAt, content }) {
                     />
 
                     <footer>
-                        <button type="submit">
+                        <button type="submit" disabled={isNewCommentEmpty}>
                             Publicar
                         </button>
                     </footer>
