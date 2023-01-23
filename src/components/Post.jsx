@@ -35,12 +35,15 @@ export function Post({ author, publishedAt, content }) {
         setNewCommentText(event.target.value);
     }
 
-    function deleteComment(commentToDelete) {
-        const commentWithoutDeleteOne = comments.filter(comment => {
-            return comment !== commentToDelete // gerar nova lista sem o comentário deletado
-        })
-        // imutabilidade => as variaveis não se modificam, elas são criadas de novo => melhor para performance
-        setComments(commentWithoutDeleteOne)
+    // Sobre a próxima função de Deletar Comentário:
+    // imutabilidade => as variaveis não se modificam, elas são criadas de novo => melhor para performance
+    // ou seja, o comentárionão foi removido. Apenas criamos um novo array SEM o comentário 'excluído'. 
+    // Assim o React não precisa utilizar a memória.
+    function deleteComment(commentToDelete) { 
+        const commentWithoutDeletedOne = comments.filter(comment => {
+            return comment !== commentToDelete // retornar lista com os comentários diferentes do comentario que eu deletei => gerei nova lista sem o comentário deletado
+        }) 
+        setComments(commentWithoutDeletedOne)
     }
 
     function handleNewCommentInvalid() {
